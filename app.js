@@ -8,38 +8,8 @@ async function generateKey() {
             true,
             ["encrypt", "decrypt"]
         );
-
-        // Export the key to JWK format
-        const exportedKey = await window.crypto.subtle.exportKey("jwk", key);
-
-        // Store the key in local storage
-        localStorage.setItem("cryptoKey", JSON.stringify(exportedKey));
     } catch (error) {
         alert("Error generating key: " + error.message);
-    }
-}
-
-async function importKey() {
-    try {
-        const cryptoKey = localStorage.getItem("cryptoKey");
-        if (!cryptoKey) {
-            throw new Error("Crypto key not found.");
-        }
-
-        const parsedKey = JSON.parse(cryptoKey);
-        if (!parsedKey.kty) {
-            throw new Error("Invalid crypto key format.");
-        }
-
-        key = await window.crypto.subtle.importKey(
-            "jwk",
-            parsedKey,
-            { name: "AES-CBC", length: 128 },
-            true,
-            ["encrypt", "decrypt"]
-        );
-    } catch (error) {
-        alert("Error importing key: " + error.message);
     }
 }
 
@@ -53,9 +23,6 @@ async function encryptString(str) {
             encodedString
         );
 
-        // Store the IV in local storage
-        localStorage.setItem("iv", JSON.stringify(Array.from(iv)));
-
         return Array.prototype.map.call(new Uint8Array(encryptedData), x => ('00' + x.toString(16)).slice(-2)).join('');
     } catch (error) {
         alert("Error encrypting string: " + error.message);
@@ -64,13 +31,6 @@ async function encryptString(str) {
 
 async function decryptString(encryptedData) {
     try {
-        // Retrieve the IV from local storage
-        const storedIv = localStorage.getItem("iv");
-        if (!storedIv) {
-            throw new Error("IV not found.");
-        }
-        iv = new Uint8Array(JSON.parse(storedIv));
-
         if (!key || !iv) {
             throw new Error("Key or IV is missing.");
         }
