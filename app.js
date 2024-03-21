@@ -45,6 +45,13 @@ async function decryptString(encryptedData) {
         alert("Error decrypting string: " + error.message);
         console.error('Error decoding string: ', error);
         return null; // Return null to indicate decryption failure
+        /**
+         * Example: 
+         * 0 ==> 0, 90
+         * 3 ==> 7, 47
+         * 13 ==> 2, 172
+         * 5 ==> 3, 38
+         */
     }
 }
 
