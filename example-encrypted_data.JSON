@@ -10,3 +10,17 @@
         "kty":"oct"
     }
 }
+
+/* new encryption here  */ 
+
+{
+    "encryptedData":"dbaeaf40c187758a13809b28cc0f24c25c6c0b820c9394021f7a816b788fd7ec36481289034df0e6641d6da8e0cff64057531a7755fe61ee65d50168050a9bb35d4e69b2fbf646669c879b6ecc61bc20",
+    "iv":[107,21,157,4,152,66,155,187,117,174,137,204,12,172,6,231],
+    "key":{
+        "alg":"A128CBC",
+        "ext":true,
+        "k":"Fg-C14-qPlZe8vatChwOCw",
+        "key_ops":["encrypt","decrypt"],
+        "kty":"oct"
+    }
+}
